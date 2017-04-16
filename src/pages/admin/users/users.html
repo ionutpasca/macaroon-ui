@@ -1,0 +1,24 @@
+<ion-header>
+	<ion-navbar color="primary">
+		<ion-title> Users</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content padding>
+	<ion-refresher (ionRefresh)="refreshAll($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+	<ion-list [virtualScroll]="users" [approxItemHeight]="'50px'">
+		<ion-item *virtualItem="let user">
+			<ion-thumbnail item-left>
+				<img src="assets/png/user.png">
+			</ion-thumbnail>
+			<h2>{{user.name}}</h2>
+			<p>{{user.email}}</p>
+			<button ion-button clear item-right (click)="openRemoveUserPrompt($event, user)">
+				<ion-icon name="ios-trash" ios="ios-trash" color="danger"></ion-icon>
+			</button>
+		</ion-item>
+	</ion-list>
+</ion-content>

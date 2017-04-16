@@ -1,0 +1,16 @@
+<ion-header>
+	<ion-navbar color="primary">
+		<ion-title>Admin</ion-title>
+		<ion-buttons end>
+			<button ion-button (click)="goHome()" icon-only>
+				<ion-icon name="home"></ion-icon>
+			</button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+
+<ion-tabs color="primary">
+	<ion-tab tabTitle="Domains" [root]="domainsTab" tabIcon="ios-apps-outline"></ion-tab>
+	<ion-tab tabTitle="Users" [root]="usersTab" tabIcon="ios-people-outline"></ion-tab>
+	<ion-tab tabTitle="Questions" [root]="questionsTab" tabIcon="ios-help-circle-outline"></ion-tab>
+</ion-tabs>

@@ -1,0 +1,23 @@
+page-users {
+    ion-item {
+        max-height: 50px;
+    };
+
+    ion-thumbnail {
+        min-height: 40px !important;
+        min-width: 40px !important;
+        height: 45px;
+        width: 45p;
+    };
+
+    ion-thumbnail {
+        img {
+            width: 45px !important;
+            height: 45px !important;
+        };
+    };
+
+    ion-icon {
+        font-size: 20px;
+    };
+};
