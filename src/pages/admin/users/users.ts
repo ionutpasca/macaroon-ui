@@ -26,6 +26,9 @@ export class Users {
 			return this.usersService.getUsers().subscribe(data => {
 				this.users = data;
 				loader.dismiss();
+			}, err => {
+				console.log("ERR", err);
+				loader.dismiss();
 			});
 		});
 	};

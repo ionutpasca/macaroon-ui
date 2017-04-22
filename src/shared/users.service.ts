@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Response } from '@angular/http';
 import { AppSettings } from './shared';
+import { HttpService } from '../providers/providers';
 
 import 'rxjs';
 import { Observable } from 'rxjs/Observable';
@@ -11,7 +12,7 @@ export class UsersService {
     private usersData = {};
     private BASE_URL = AppSettings.API_ENDPOINT;
 
-    constructor(private http: Http) { };
+    constructor(private http: HttpService) { };
 
     getUsers(): Observable<any> {
         return this.http.get(`${this.BASE_URL}/users`)
