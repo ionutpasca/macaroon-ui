@@ -45,13 +45,14 @@ export class AuthService {
     };
 
     public register(credentials) {
-        if (credentials.email === null || credentials.password === null) {
+        if (!credentials.email || !credentials.password || !credentials.name) {
             return Observable.throw('Please insert credentials');
         }
         else {
             return this.http.post(`${AppSettings.API_ENDPOINT}/register`, JSON.stringify(credentials), this.options)
                 .map((response: Response) => {
                     const data = response.json();
+                    console.log("DATA",data);
                     return Promise.all([
                         this.setToken(data.token),
                         this.setCurrentUser(data.userInfo)
