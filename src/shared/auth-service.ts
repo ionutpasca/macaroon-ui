@@ -33,7 +33,6 @@ export class AuthService {
             return this.http.post(`${AppSettings.API_ENDPOINT}/login`, JSON.stringify(credentials), this.options)
                 .map((response: Response) => {
                     const data = response.json();
-                    console.log("DATA", data);
                     return Promise.all([
                         this.setToken(data.token),
                         this.setCurrentUser(data.userInfo)
