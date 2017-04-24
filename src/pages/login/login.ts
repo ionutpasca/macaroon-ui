@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, AlertController, LoadingController, Loading, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, AlertController, LoadingController, Loading, NavController, NavParams, Platform } from 'ionic-angular';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 
 import { AuthService } from '../../shared/shared';
 import { Register, Home } from '../pages';
@@ -13,12 +14,15 @@ export class Login {
 	loading: Loading;
 	invalidCredentials = false;
 	credentials = {};
+	fbResponse: string = '';
 
 	constructor(private navCtrl: NavController,
 		private navParams: NavParams,
 		private alertController: AlertController,
 		private auth: AuthService,
-		private loadingController: LoadingController) { };
+		private loadingController: LoadingController,
+		private fb: Facebook,
+		private platform: Platform) { };
 
 	ionViewDidLoad() {
 		console.log('ionViewDidLoad Login');
@@ -37,7 +41,7 @@ export class Login {
 				this.loading.dismiss();
 				this.navCtrl.setRoot(Home);
 			} else {
-				this.showError('Access Denied');
+				console.log('Access Denied');
 			}
 		}, error => {
 			console.log("Err", error);
@@ -58,16 +62,27 @@ export class Login {
 		this.loading.present();
 	};
 
-	showError(text) {
-		setTimeout(() => {
-			this.loading.dismiss();
-		});
-
-		let alert = this.alertController.create({
-			title: 'Fail',
-			subTitle: text,
-			buttons: ['OK']
-		});
-		alert.present(prompt);
+	async loginWithFb() {
+		let permissions = ['public_profile', 'user_friends', 'email'];
+		if (this.platform.is('cordova')) {
+			try {
+				this.showLoading();
+				let loginResponse: FacebookLoginResponse = await this.fb.login(permissions);
+				const accessToken = loginResponse.authResponse.accessToken;
+				this.auth.loginWithFacebook(accessToken).subscribe(resp => {
+					if (resp) {
+						this.loading.dismiss();
+						this.navCtrl.setRoot(Home);
+					} else {
+						console.log('Access Denied');
+					}
+				});
+			} catch (error) {
+				throw error;
+			}
+		} else {
+			console.log('Please run me on mobile');
+			return false;
+		}
 	};
 };

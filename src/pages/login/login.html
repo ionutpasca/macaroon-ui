@@ -22,14 +22,15 @@
 					</ion-list>
 				</ion-col>
 			</ion-row>
-
 			<ion-row>
 				<ion-col class="signup-col">
 					<button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid">Login</button>
           			<button ion-button class="register-btn" type="button" block clear (click)="createAccount()">Create New Account</button>
+
+          			<button ion-button class="register-btn" type="button" block clear (click)="loginWithFb()">Facebook Login</button>
+					  
 				</ion-col>
 			</ion-row>
-			
 		</form>
 	</div>
 </ion-content>

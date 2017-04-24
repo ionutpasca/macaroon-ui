@@ -3,7 +3,9 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '@ionic/storage';
+import { Facebook } from '@ionic-native/facebook';
 
+import { User } from '../models/models';
 import { UsersService, AuthService } from '../shared/shared';
 import { Login, Admin, Home } from '../pages/pages';
 
@@ -17,6 +19,8 @@ export class MyApp {
 	@ViewChild(Nav) nav: Nav;
 
 	rootPage: any;
+	FB_APP_ID: number = 1835099360148534;
+	currentUser: User;
 
 	pages: Array<{ title: string, component: any }>;
 
@@ -24,33 +28,25 @@ export class MyApp {
 		private statusBar: StatusBar,
 		private splashScreen: SplashScreen,
 		private auth: AuthService,
-		private storage: Storage) {
+		private storage: Storage,
+		private fb: Facebook) {
+
+		this.fb.browserInit(this.FB_APP_ID, 'v2.8');
 		this.initializeApp();
 	};
 
 	initializeApp() {
 		this.platform.ready().then(() => {
 			this.statusBar.styleDefault();
-			this.useIsLoggedIn()
-				.then(() => {
+			this.auth.isLoggedIn()
+				.then(useIsLogged => {
+					this.rootPage = useIsLogged ? Home : Login;
+					this.currentUser = this.auth.getUserInfo();
 					this.splashScreen.hide();
 				})
 				.catch(() => {
-					this.splashScreen.hide();
-				});
-		});
-	};
-
-	useIsLoggedIn() {
-		return new Promise((resolve, reject) => {
-			this.auth.isLoggedIn()
-				.then(response => {
-					this.rootPage = response ? Home : Login;
-					resolve(true);
-				})
-				.catch(err => {
 					this.rootPage = Login;
-					reject(err);
+					this.splashScreen.hide();
 				});
 		});
 	};

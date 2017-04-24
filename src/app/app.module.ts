@@ -3,6 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { HttpModule, RequestOptions, XHRBackend } from '@angular/http';
 import { IonicStorageModule } from '@ionic/storage';
+import { Facebook } from '@ionic-native/facebook';
 
 import { MyApp } from './app.component';
 import { Domains, Home, Questions, Users, Admin, Register, Login } from '../pages/pages';
@@ -43,6 +44,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 	providers: [
 		AuthService,
 		StatusBar,
+		Facebook,
 		SplashScreen,
 		{ provide: ErrorHandler, useClass: IonicErrorHandler },
 		{

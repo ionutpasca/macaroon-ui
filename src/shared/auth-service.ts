@@ -25,26 +25,42 @@ export class AuthService {
     };
 
     public login(credentials): Observable<any> {
-        if (credentials.email === null || credentials.password === null) {
+        if (!credentials.email || !credentials.password) {
             return Observable.throw('Please insert credentials');
         }
-        else {
-            credentials.username = credentials.email;
-            return this.http.post(`${AppSettings.API_ENDPOINT}/login`, JSON.stringify(credentials), this.options)
-                .map((response: Response) => {
-                    const data = response.json();
-                    return Promise.all([
-                        this.setToken(data.token),
-                        this.setCurrentUser(data.userInfo)
-                    ]);
-                })
-                .map(() => {
-                    return true;
-                });
-        }
+        credentials.username = credentials.email;
+        return this.http.post(`${AppSettings.API_ENDPOINT}/login`, JSON.stringify(credentials), this.options)
+            .map((response: Response) => {
+                const data = response.json();
+                return Promise.all([
+                    this.setToken(data.token),
+                    this.setCurrentUser(data.userInfo)
+                ]);
+            })
+            .map(() => {
+                return true;
+            });
     };
 
-    public register(credentials) {
+    public loginWithFacebook(accessToken): Observable<any> {
+        const headers = this.headers;
+        headers.append('Authorization', `Bearer ${accessToken}`);
+        const options = new RequestOptions({ headers: headers });
+
+        return this.http.get(`${AppSettings.API_ENDPOINT}/login/facebook`, options)
+            .map((response: Response) => {
+                const data = response.json();
+                return Promise.all([
+                    this.setToken(data.token),
+                    this.setCurrentUser(data.userInfo)
+                ]);
+            })
+            .map(() => {
+                return true;
+            });
+    };
+
+    public register(credentials): Observable<any> {
         if (!credentials.email || !credentials.password || !credentials.name) {
             return Observable.throw('Please insert credentials');
         }
@@ -52,7 +68,6 @@ export class AuthService {
             return this.http.post(`${AppSettings.API_ENDPOINT}/register`, JSON.stringify(credentials), this.options)
                 .map((response: Response) => {
                     const data = response.json();
-                    console.log("DATA",data);
                     return Promise.all([
                         this.setToken(data.token),
                         this.setCurrentUser(data.userInfo)
@@ -62,6 +77,16 @@ export class AuthService {
                     return true;
                 })
         }
+    };
+
+    public logout() {
+        return Observable.create(observer => {
+            this.currentUser = null;
+            observer.next(true);
+            this.setToken('').then(() => {
+                observer.complete();
+            });
+        });
     };
 
     public async setToken(newToken) {
@@ -88,15 +113,5 @@ export class AuthService {
         }
         const token = await this.storage.get('token');
         return token ? true : false;
-    };
-
-    public logout() {
-        return Observable.create(observer => {
-            this.currentUser = null;
-            observer.next(true);
-            this.setToken('').then(() => {
-                observer.complete();
-            });
-        });
     };
 };
