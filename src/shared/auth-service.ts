@@ -9,7 +9,6 @@ import { AppSettings } from './shared';
 
 @Injectable()
 export class AuthService {
-    private currentUser: User;
     private token: string;
     headers: Headers;
     options: RequestOptions;
@@ -81,7 +80,6 @@ export class AuthService {
 
     public logout() {
         return Observable.create(observer => {
-            this.currentUser = null;
             observer.next(true);
             this.setToken('').then(() => {
                 observer.complete();
@@ -95,12 +93,13 @@ export class AuthService {
     };
 
     public async setCurrentUser(user) {
+        console.log("INTRU SA SETEZ", user);
         await this.storage.set('user', user);
-        this.currentUser = user;
     };
 
-    public getUserInfo(): User {
-        return this.currentUser;
+    public async getUserInfo(): Promise<User> {
+        let user = await this.storage.get('user');
+        return user;
     };
 
     public getToken() {

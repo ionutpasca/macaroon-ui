@@ -8,5 +8,19 @@
 </ion-header>
 
 <ion-content padding>
-	<h2>Welcome home!</h2>
+	<ion-card>
+		<ion-card-header>Welcome!</ion-card-header>
+		<ion-card-content>
+
+			<ion-item *ngIf="currentUser">
+				<ion-avatar item-left>
+					<img *ngIf="!currentUser.profileImageUrl" src="assets/png/user.png">
+					<img *ngIf="currentUser.profileImageUrl" [src]="currentUser.profileImageUrl" alt="Profile image">
+				</ion-avatar>
+				<h2> {{currentUser.email}} </h2>
+				<p> {{currentUser.name}} </p>
+			</ion-item>
+		</ion-card-content>
+	</ion-card>
+
 </ion-content>

@@ -41,7 +41,10 @@ export class MyApp {
 			this.auth.isLoggedIn()
 				.then(useIsLogged => {
 					this.rootPage = useIsLogged ? Home : Login;
-					this.currentUser = this.auth.getUserInfo();
+					return this.auth.getUserInfo();
+				})
+				.then((user: User) => {
+					this.currentUser = user;
 					this.splashScreen.hide();
 				})
 				.catch(() => {
