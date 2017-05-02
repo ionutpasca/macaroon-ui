@@ -1,53 +1,78 @@
 page-login {
- 
+  font-family: Courier New, Courier, monospace;
+
   .login-content {
-    background: #56CA96;
- 
+    background: #141E30;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
     .logo-row {
       padding-top: 50px;
       padding-bottom: 20px;
     }
- 
+  
     .login-box {
-      background: #399F8B;
+      // background: #6c738d;
       padding: 20px 20px 0px 20px;
       margin-top: 30px;
     }
- 
+  
     ion-row {
-       align-items: center;
-       text-align: center;
-     }
+      align-items: center;
+      text-align: center;
+
+      .input-field {
+          background: none;
+          color: #fff;
+          border:none;
+          border-bottom: 1px solid #fff;
+        }
+          ion-label {
+            color: #fff;
+
+            .floating {
+              color: #fff;
+            }
+          }
+
+        ion-col {
+          .submit-btn {
+            background: transparent;
+            border: 1px solid #fff;
+            border-radius: 30px;
+          }
+        }
+    }
  
-     ion-item {
-         border-radius: 30px !important;
-         padding-left: 30px !important;
-         font-size: 0.9em;
-         margin-bottom: 10px;
-         border: 1px solid #ffffff;
-         border-bottom: 0px !important;
-         box-shadow: none !important;
-     }
+    //  ion-item {
+    //      border-radius: 30px !important;
+    //      padding-left: 30px !important;
+    //      font-size: 0.9em;
+    //      margin-bottom: 10px;
+    //      border: 1px solid #ffffff;
+    //      border-bottom: 0px !important;
+    //      box-shadow: none !important;
+    //  }
  
-     .signup-col {
-       margin: 0px 16px 0px 16px;
-       padding-bottom: 20px;
-     }
+    //  .signup-col {
+    //    margin: 0px 16px 0px 16px;
+    //    padding-bottom: 20px;
+    //  }
  
-     .item-inner {
-       border-bottom-color: #ffffff !important;
-       box-shadow: none !important;
-     }
+    //  .item-inner {
+    //    border-bottom-color: #ffffff !important;
+    //    box-shadow: none !important;
+    //  }
  
-     .submit-btn {
-       background: #51CFB1;
-       border-radius: 30px !important;
-       border: 1px solid #ffffff;
-     }
+    //  .submit-btn {
+    //    background: #7483BA;
+    //    border-radius: 30px !important;
+    //    border: 1px solid #ffffff;
+    //  }
  
-     .register-btn {
-       color: #ffffff;
-       font-size: 0.8em;
-     }
+    //  .register-btn {
+    //    color: #ffffff;
+    //    font-size: 0.8em;
+    //  }
   }
 }

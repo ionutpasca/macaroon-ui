@@ -1,5 +1,32 @@
 // http://ionicframework.com/docs/v2/theming/
 
+#right-menu {
+	ion-item {
+        max-height: 50px;
+		margin-top: 5px;
+    };
+
+    ion-thumbnail {
+        min-height: 40px !important;
+        min-width: 40px !important;
+        height: 45px;
+        width: 45p;
+    };
+
+    ion-thumbnail {
+        img {
+            width: 45px !important;
+            height: 45px !important;
+			border-radius: 50%;
+        };
+    };
+
+    ion-icon {
+        font-size: 20px;
+    };
+}
+
+@import '../components/chat-bubble/chat-bubble.scss';
 
 // App Global Sass
 // --------------------------------------------------

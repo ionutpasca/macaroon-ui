@@ -1,9 +1,12 @@
 <ion-header>
-	<ion-navbar color="primary">
-		<button ion-button menuToggle icon-only>
+	<ion-navbar color="secondary">
+		<button ion-button menuToggle="left" icon-only>
           	<ion-icon name="menu"></ion-icon>
         </button>
 		<ion-title>Home</ion-title>
+		<button ion-button menuToggle="right" icon-only right>
+          	<ion-icon name="chatboxes"></ion-icon>
+        </button>
 	</ion-navbar>
 </ion-header>
 
@@ -21,6 +24,22 @@
 				<p> {{currentUser.name}} </p>
 			</ion-item>
 		</ion-card-content>
-	</ion-card>
 
+
+	</ion-card>
+	<span padding> Logged users:</span>
+	<ion-scroll scrollX="true" zoom="false" padding>
+		<div>
+			<ion-item *ngFor="let user of loggedUsers" class="user-image-item item" (click)="openChatRoom(user)">
+				<ion-avatar *ngIf="user.profileImageUrl === null">
+					<img src="assets/png/user.png">
+					<span>{{user.name}}</span>
+				</ion-avatar>
+				<ion-avatar *ngIf="user.profileImageUrl !== null">
+					<img [src]="user.profileImageUrl" onError="this.src='assets/png/user.png'">
+					<span>{{user.name}}</span>
+				</ion-avatar>
+			</ion-item>
+		</div>
+	</ion-scroll>
 </ion-content>

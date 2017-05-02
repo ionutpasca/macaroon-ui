@@ -1,3 +1,62 @@
 page-home {
+	white-space: nowrap;
 
+	ion-scroll ion-item {
+		white-space: nowrap;
+	}
+	ion-scroll ion-row {
+		white-space: nowrap;
+	}
+	ion-scroll .scroll-content{
+		position: relative;
+		height: 100px;
+		padding: 0 !important;
+	}
+
+	ion-scroll .scroll-zoom-wrapper{
+		position: absolute;
+		height: 100px;
+		width: 100%;
+	}
+
+	.user-image-item {
+		width: 80px;
+		display: inline-block;
+		padding: 0;
+	}
+
+	.user-image-item ion-label {
+		width: 40px;
+		margin: 13px 8px 13px 8px;
+		text-align: center;
+	}
+
+	.user-image-item img {
+		margin: 0 auto;
+	}
+
+	.user-image-item span {
+		font-size: 10px;
+	}
+
+	.user-image-item .item-inner {
+		border: none;
+		padding: 0 !important;
+		border: none !important;
+	}
+
+	.logged_users_list {
+		width: 100% !important;
+	}
+
+	.logged_users_list {
+		width: 80px;
+		padding: 0;
+	}
+
+	::-webkit-scrollbar,
+	*::-webkit-scrollbar {
+		display: none;
+	}
+	
 }
