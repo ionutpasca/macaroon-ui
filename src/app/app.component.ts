@@ -5,14 +5,15 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '@ionic/storage';
 import { Facebook } from '@ionic-native/facebook';
 
-import { User } from '../models/models';
-import { UsersService, AuthService } from '../shared/shared';
+import { User, Domain } from '../models/models';
+import { UsersService, DomainsService,  AuthService } from '../shared/shared';
 import { Login, Admin, Home } from '../pages/pages';
 
 @Component({
 	templateUrl: 'app.html',
 	providers: [
-		UsersService
+		UsersService,
+		DomainsService
 	]
 })
 export class MyApp {

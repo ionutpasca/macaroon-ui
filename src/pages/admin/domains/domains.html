@@ -5,5 +5,20 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-refresher (ionRefresh)="refreshAll($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    
+	<ion-list [virtualScroll]="domains" [approxItemHeight]="'30px'">
+		<ion-item *virtualItem="let domain">
+		  <ion-icon item-left name="book"></ion-icon>
+			<h2>{{domain.name}}</h2>
+			<!--<button ion-button clear item-right (click)="openRemoveDomainPrompt($event, domain)">-->
+				<!--<button ion-button clear item-right (click)="domainPopover($event)">-->
+				<ion-icon name="more" color="danger" (click)="domainPopover($event)"></ion-icon> 
+			<!--</button>-->
+		</ion-item>
+	</ion-list>
 
 </ion-content>
