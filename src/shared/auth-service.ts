@@ -12,6 +12,7 @@ export class AuthService {
     private token: string;
     headers: Headers;
     options: RequestOptions;
+    defaultImageUrl: string;
 
     constructor(private http: Http, private storage: Storage) {
         if (!this.token) {
@@ -21,6 +22,7 @@ export class AuthService {
         }
         this.headers = new Headers({ 'Content-Type': 'application/json' });
         this.options = new RequestOptions({ headers: this.headers });
+        this.defaultImageUrl = 'assets/png/user.png';
     };
 
     public login(credentials): Observable<any> {
@@ -93,7 +95,7 @@ export class AuthService {
     };
 
     public async setCurrentUser(user) {
-        console.log("INTRU SA SETEZ", user);
+        user.profileImageUrl = user.profileImageUrl ? user.profileImageUrl : this.defaultImageUrl;
         await this.storage.set('user', user);
     };
 

@@ -1,0 +1,23 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>{{receiver.name}}</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content padding>
+	<ion-row class="chat-message-list">
+		<ion-list no-lines col-12>
+			<ion-item *ngFor="let message of messages">
+				<chat-bubble [message]="message"></chat-bubble>
+			</ion-item>
+		</ion-list>
+	</ion-row>
+	<ion-row class="chat-message-input">
+		<ion-col col-10>
+			<ion-input type="text" [(ngModel)]="message"></ion-input>
+		</ion-col>
+		<ion-col col-2>
+			<button ion-button (click)="sendMessage()">Send</button>
+		</ion-col>
+	</ion-row>
+</ion-content>

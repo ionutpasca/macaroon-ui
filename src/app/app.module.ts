@@ -1,22 +1,25 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { Events, IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { HttpModule, RequestOptions, XHRBackend } from '@angular/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { Facebook } from '@ionic-native/facebook';
 
 import { MyApp } from './app.component';
-import { Domains, Home, Questions, Users, Admin, Register, Login } from '../pages/pages';
-import { AuthService } from '../shared/shared';
+import { ChatPrivate, Domains, Home, Questions, Users, Admin, Register, Login } from '../pages/pages';
+import { AuthService, Communicator } from '../shared/shared';
 import { HttpService } from '../providers/providers';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { ChatBubble } from '../components/components';
 
 @NgModule({
 	declarations: [
 		MyApp,
 		Admin,
+		ChatBubble,
+		ChatPrivate,
 		Domains,
 		Home,
 		Questions,
@@ -34,6 +37,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 	entryComponents: [
 		MyApp,
 		Admin,
+		ChatBubble,
+		ChatPrivate,
 		Domains,
 		Home,
 		Questions,
@@ -53,6 +58,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 				return new HttpService(backend, options, authService);
 			},
 			deps: [XHRBackend, RequestOptions, AuthService]
+		},
+		{
+			provide: Communicator,
+			useFactory: (events: Events) => {
+				return new Communicator(events);
+			},
+			deps: [Events]
 		}
 	]
 })

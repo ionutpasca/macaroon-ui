@@ -1,0 +1,19 @@
+page-chat-private {
+	.chat-message-list {
+		height: 90%;
+		overflow: auto;
+	}
+	
+	.chat-message-input {
+		height: 10%;
+	}
+
+	ion-input {
+		border-bottom: 1px solid black;
+	}
+
+	::-webkit-scrollbar,
+	*::-webkit-scrollbar {
+		display: none;
+	}
+}
