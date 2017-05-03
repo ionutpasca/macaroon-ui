@@ -13,7 +13,8 @@ import { ChatPrivate, Login, Admin, Home } from '../pages/pages';
 	templateUrl: 'app.html',
 	providers: [
 		ChatRoomService,
-		DomainsService
+		DomainsService,
+		UsersService
 	]
 })
 export class MyApp {

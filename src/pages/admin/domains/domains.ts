@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { PopoverController, IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { ViewChild, ElementRef } from '@angular/core';
+import { Popover } from '../../../components/components';
 
 import { DomainsService } from '../../../shared/shared';
 import * as _ from 'lodash';
@@ -19,7 +20,8 @@ export class Domains {
 		private navParams: NavParams,
 		private domainsService: DomainsService,
 		private popoverCtrl: PopoverController,
-		private loadingController: LoadingController) { };
+		private loadingController: LoadingController,
+		private elementRef: ElementRef) { };
 
 	ionViewDidLoad() {
 		console.log('ionViewDidLoad Domains');
@@ -61,8 +63,10 @@ export class Domains {
 	};
 
 	domainPopover(event) {
-		let popover = this.popoverCtrl.create({});
-		popover.present();
+		let popover = this.popoverCtrl.create(Popover);
+		popover.present({
+			ev: event
+		});
 	};
 
 	openDomainPrompt(event, domain) {

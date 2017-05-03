@@ -12,7 +12,7 @@ import { HttpService } from '../providers/providers';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { ChatBubble } from '../components/components';
+import { ChatBubble, Popover } from '../components/components';
 
 @NgModule({
 	declarations: [
@@ -22,6 +22,7 @@ import { ChatBubble } from '../components/components';
 		ChatPrivate,
 		Domains,
 		Home,
+		Popover,
 		Questions,
 		Users,
 		Register,
@@ -41,6 +42,7 @@ import { ChatBubble } from '../components/components';
 		ChatPrivate,
 		Domains,
 		Home,
+		Popover,
 		Questions,
 		Users,
 		Register,

@@ -46,14 +46,16 @@ export class ChatPrivate {
 	};
 
 	mapChatResponseToModel(chatRoomResponse) {
+		console.log('Chat room response', chatRoomResponse);
 		const messages = chatRoomResponse.messages;
 		return _.map(messages, (message) => {
 			let receiverImage = this.receiver.profileImageUrl ? this.receiver.profileImageUrl : AppSettings.DEFAULT_PROFILE_IMAGE;
 			const senderName = message.sender === this.receiver.id ? this.receiver.name : this.currentUser.name;
 			const img = message.sender === this.receiver.id ? receiverImage : this.currentUser.profileImageUrl;
+			const date = moment(message.date).calendar().toString();
 
 			const msgPosition = message.sender === this.receiver.id ? 'left' : 'right';
-			return new ChatMessage(senderName, message.message, message.sending_date, msgPosition, img);
+			return new ChatMessage(senderName, message.message, date, msgPosition, img);
 		});
 	};
 
